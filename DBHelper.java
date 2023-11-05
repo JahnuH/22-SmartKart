@@ -9,48 +9,53 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
-        super(context, "Userdata.db", null, 1);
+        super(context, "ProductDatabase.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("create Table UserDetails(name TEST primary key, contact TEXT, dob TEXT)");
+        DB.execSQL("create Table ProductDetails(barcode TEXT primary key, name TEXT, price TEXT, category TEXT, description TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
-        DB.execSQL("drop Table if exists Userdetails");
+        DB.execSQL("drop Table if exists Productdetails");
     }
 
-    public Boolean insertuserdata(String name, String contact, String dob) {
+    public Boolean insertuserdata(String barcode, String name, String price, String category, String description) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("barcode", barcode);
         contentValues.put("name", name);
-        contentValues.put("contact", contact);
-        contentValues.put("dob", dob);
-        long result = DB.insert("Userdetails", null, contentValues);
+        contentValues.put("price", price);
+        contentValues.put("category", category);
+        contentValues.put("description", description);
+        long result = DB.insert("Productdetails", null, contentValues);
         return result != -1;
     }
 
-    public Boolean updateuserdata(String name, String contact, String dob) {
+    public Boolean updateuserdata(String barcode, String name, String price, String category, String description) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("contact", contact);
-        contentValues.put("dob", dob);
-        Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[] {name});
+        contentValues.put("barcode", barcode);
+        contentValues.put("name", name);
+        contentValues.put("price", price);
+        contentValues.put("category", category);
+        contentValues.put("description", description);
+        Cursor cursor = DB.rawQuery("Select * from Productdetails where barcode = ?", new String[] {barcode});
         if(cursor.getCount()>0) {
-            long result = DB.update("Userdetails", contentValues, "name=?", new String[] {name});
+            long result = DB.update("Productdetails", contentValues, "barcode=?", new String[] {barcode});
             return result != -1;
         } else {
             return false;
         }
     }
 
-    public Boolean deletedata(String name) {
+    public Boolean deletedata(String barcode) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[] {name});
+        Cursor cursor = DB.rawQuery("Select * from Productdetails where barcode = ?", new String[] {barcode});
         if(cursor.getCount()>0) {
-            long result = DB.delete("Userdetails", "name=?", new String[] {name});
+            long result = DB.delete("Productdetails", "barcode=?", new String[] {barcode});
             return result != -1;
         } else {
             return false;
@@ -59,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor getdata() {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Userdetails", null);
+        Cursor cursor = DB.rawQuery("Select * from Productdetails", null);
         return cursor;
     }
 

@@ -8,7 +8,7 @@
     android:background="#000000"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".LoginActivity" >
+    tools:context=".SignUpActivity" >
 
     <ImageView
         android:layout_width="150dp"
@@ -50,7 +50,7 @@
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Login"
+        android:text="Sign Up"
         android:textSize="25sp" />
 
     <TextView
@@ -60,6 +60,6 @@
         android:layout_marginTop="50dp"
         android:textSize="20sp"
         android:textColor="#ffffff"
-        android:text="New User? Sign Up" />
+        android:text="Already signed up? Login" />
 
 </LinearLayout>
