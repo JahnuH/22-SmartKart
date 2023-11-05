@@ -1,5 +1,6 @@
 package com.example.smartbasket;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Button;
@@ -95,7 +96,8 @@ public class ManagementActivity extends AppCompatActivity {
 
         Button doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(v -> {
-            Toast.makeText(ManagementActivity.this, "Done Button", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ManagementActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
     }

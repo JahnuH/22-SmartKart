@@ -14,15 +14,8 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        SharedPreferences sp = getSharedPreferences("Users", MODE_PRIVATE);
-        boolean isLoggedIn = sp.getBoolean("LoggedIN", false);
         Handler handler = new Handler();
-
-        if (isLoggedIn) {
-            handler.postDelayed(() -> startActivity(new Intent(this, MainActivity.class)), 2500 );
-        } else {
-            handler.postDelayed(() -> startActivity(new Intent(this, LoginActivity.class)), 2500 );
-        }
+        handler.postDelayed(() -> startActivity(new Intent(this, LoginActivity.class)), 2500 );
 
     }
 
